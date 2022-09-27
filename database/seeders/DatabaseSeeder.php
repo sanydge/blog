@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -15,14 +13,17 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        $user = User::factory()->create([
-            'name'  => 'John Doe'
-        ]);
-        Post::factory(5)->create([
-            'user_id' => $user->id
-        ]);
+        $user = User::factory(5)->create([
+//            'name'  => 'John'
+        ])->each(function (User $user){
+            Post::factory(5)->create([
+                'user_id' => $user->id
+            ]);
+        });
+
+
 
 //        $user = User::factory()->create();
 //
